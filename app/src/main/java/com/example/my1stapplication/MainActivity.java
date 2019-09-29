@@ -73,25 +73,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(MainActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
             return;
         }else if (Password.length()<6){
-            Toast.makeText(MainActivity.this,"Passwor must be greater then 6 digit",Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this,"Password must be more then 6 digits",Toast.LENGTH_SHORT).show();
             return;
         }
         mDialog.setMessage("Creating User please wait...");
         mDialog.setCanceledOnTouchOutside(false);
         mDialog.show();
-        mAuth.createUserWithEmailAndPassword(Email,Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    sendEmailVerification();
-                    mDialog.dismiss();
-                    OnAuth(task.getResult().getUser());
-                    mAuth.signOut();
-                }else{
-                    Toast.makeText(MainActivity.this,"error on creating user",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        mAuth.createUserWithEmailAndPassword(Email, Password)
+                .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(MainActivity.this, "Authentication failed." + task.getException(),
+                                    Toast.LENGTH_SHORT).show();
+                            mDialog.dismiss();
+                        } else {
+                            sendEmailVerification();
+                            startActivity(new Intent(MainActivity.this, MainActivity.class));
+                            mDialog.dismiss();
+                            finish();
+                        }
+                    }
+                });
+
     }
     //Email verification code using FirebaseUser object and using isSucccessful()function.
     private void sendEmailVerification() {

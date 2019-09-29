@@ -7,10 +7,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -30,6 +33,7 @@ public class ActivityLogin extends AppCompatActivity {
         logInpasswd = findViewById(R.id.loginpaswd);
         btnLogIn = findViewById(R.id.btnLogIn);
         signup = findViewById(R.id.TVSignIn);
+
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(FirebaseAuth firebaseAuth) {
@@ -54,7 +58,7 @@ public class ActivityLogin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String userEmail = loginEmailId.getText().toString();
-                String userPaswd = logInpasswd.getText().toString();
+                final String userPaswd = logInpasswd.getText().toString();
                 if(userEmail.equals("admin@gmail.com") && userPaswd.equals("admin123")){
                     startActivity(new Intent(ActivityLogin.this, Admin.class));
                 }
@@ -67,16 +71,27 @@ public class ActivityLogin extends AppCompatActivity {
                 } else if (userEmail.isEmpty() && userPaswd.isEmpty()) {
                     Toast.makeText(ActivityLogin.this, "Fields Empty!", Toast.LENGTH_SHORT).show();
                 } else if (!(userEmail.isEmpty() && userPaswd.isEmpty())) {
-                    firebaseAuth.signInWithEmailAndPassword(userEmail, userPaswd).addOnCompleteListener(ActivityLogin.this, new OnCompleteListener() {
-                        @Override
-                        public void onComplete(Task task) {
-                            if (!task.isSuccessful()) {
-                                Toast.makeText(ActivityLogin.this, "Not sucessfull", Toast.LENGTH_SHORT).show();
-                            } else {
-                                startActivity(new Intent(ActivityLogin.this, UserActivity.class));
-                            }
-                        }
-                    });
+                    firebaseAuth.signInWithEmailAndPassword(userEmail, userPaswd)
+                            .addOnCompleteListener(ActivityLogin.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    // If sign in fails, display a message to the user. If sign in succeeds
+                                    // the auth state listener will be notified and logic to handle the
+                                    // signed in user can be handled in the listener.
+                                    if (!task.isSuccessful()) {
+                                        // there was an error
+                                        if (userPaswd.length() < 6) {
+                                            logInpasswd.setError("Pasword is too short");
+                                        } else {
+                                            Toast.makeText(ActivityLogin.this, "Authentication failed", Toast.LENGTH_LONG).show();
+                                        }
+                                    } else {
+                                        Intent intent = new Intent(ActivityLogin.this, UserActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                    }
+                                }
+                            });
                 } else {
                     Toast.makeText(ActivityLogin.this, "Error", Toast.LENGTH_SHORT).show();
                 }
