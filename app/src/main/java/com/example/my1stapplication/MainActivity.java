@@ -24,14 +24,16 @@ import com.google.firebase.storage.StorageReference;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    EditText name,email,password;
+    EditText name,email,password,password2;
     Button mRegisterbtn;
     TextView mLoginPageBack;
     FirebaseAuth mAuth;
     StorageReference mdatabase;
-    String Name,Email,Password;
+    String Name,Email,Password ;
     ProgressDialog mDialog;
     Toolbar tb;
+    private String Password2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         name = (EditText)findViewById(R.id.name);
         email = (EditText)findViewById(R.id.email);
         password = (EditText)findViewById(R.id.password);
+        password2 = (EditText)findViewById(R.id.password2);
         mRegisterbtn = (Button)findViewById(R.id.signUp);
         mLoginPageBack = (TextView)findViewById(R.id.signIn);
         mAuth = FirebaseAuth.getInstance();
@@ -62,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Name = name.getText().toString().trim();
         Email = email.getText().toString().trim();
         Password = password.getText().toString().trim();
+        Password2 = password2.getText().toString().trim();
 
         if (TextUtils.isEmpty(Name)){
             Toast.makeText(MainActivity.this, "Enter Name", Toast.LENGTH_SHORT).show();
@@ -75,7 +79,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }else if (Password.length()<6){
             Toast.makeText(MainActivity.this,"Password must be more then 6 digits",Toast.LENGTH_SHORT).show();
             return;
+        }else  if (!password.equals(password2)) {
+
+            Toast.makeText(MainActivity.this,"Both password fields must be identical",Toast.LENGTH_SHORT).show();
+
         }
+
         mDialog.setMessage("Creating User please wait...");
         mDialog.setCanceledOnTouchOutside(false);
         mDialog.show();

@@ -23,6 +23,7 @@ public class ActivityLogin extends AppCompatActivity {
     TextView signup;
     FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
+    TextView  forgetpass;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +34,7 @@ public class ActivityLogin extends AppCompatActivity {
         logInpasswd = findViewById(R.id.loginpaswd);
         btnLogIn = findViewById(R.id.btnLogIn);
         signup = findViewById(R.id.TVSignIn);
+        forgetpass= findViewById(R.id.forgetpass);
 
         authStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -51,6 +53,13 @@ public class ActivityLogin extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent I = new Intent(ActivityLogin.this, MainActivity.class);
+                startActivity(I);
+            }
+        });
+        forgetpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent I = new Intent(ActivityLogin.this,ResetPassword.class);
                 startActivity(I);
             }
         });
