@@ -7,16 +7,20 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class UserActivity extends AppCompatActivity {
     Button btnLogOut;
     FirebaseAuth firebaseAuth;
+    StorageReference courseReference, materialTypeReference;
     private FirebaseAuth.AuthStateListener authStateListener;
 
     @Override
@@ -35,6 +39,8 @@ public class UserActivity extends AppCompatActivity {
 
             }
         });
+        courseReference= FirebaseStorage.getInstance().getReference().child("posts").child("coursename");
+        materialTypeReference=FirebaseStorage.getInstance().getReference().child("posts").child("materialtype");
 
 // Create the adapter that will return a fragment for each section
  /*       mPagerAdapter = new FragmentPagerAdapter(getSupportFragmentManager()) {
@@ -94,4 +100,42 @@ public class UserActivity extends AppCompatActivity {
             return super.onOptionsItemSelected(item);
         }*/
     }
+    /*@Override
+    public void onStart() {
+        super.onStart();
+
+        // Add value event listener to the post
+        // [START post_value_event_listener]
+        ChildEventListener postListener = new ChildEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get Post object and use the values to update the UI
+                Post post = dataSnapshot.getValue(Post.class);
+                // [START_EXCLUDE]
+                mAuthorView.setText(post.author);
+                mTitleView.setText(post.title);
+                mBodyView.setText(post.body);
+                // [END_EXCLUDE]
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w(TAG, "loadPost:onCancelled", databaseError.toException());
+                // [START_EXCLUDE]
+                Toast.makeText(PostDetailActivity.this, "Failed to load post.",
+                        Toast.LENGTH_SHORT).show();
+                // [END_EXCLUDE]
+            }
+        };
+        mPostReference.addValueEventListener(postListener);
+        // [END post_value_event_listener]
+
+        // Keep copy of post listener so we can remove it when app stops
+        mPostListener = postListener;
+
+        // Listen for comments
+        mAdapter = new CommentAdapter(this, mCommentsReference);
+        mCommentsRecycler.setAdapter(mAdapter);
+    }*/
 }
