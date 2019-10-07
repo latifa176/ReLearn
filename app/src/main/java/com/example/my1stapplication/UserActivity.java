@@ -12,8 +12,6 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class UserActivity extends AppCompatActivity {
     Button btnLogOut;
-    Button addPost;
-    Button bookslist;
     FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
 
@@ -22,23 +20,6 @@ public class UserActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user);
         btnLogOut = (Button) findViewById(R.id.btnLogOut);
-        addPost = (Button) findViewById(R.id.b1);
-        bookslist = (Button) findViewById(R.id.button);
-
-        bookslist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                movetobookslist();
-            }
-        });
-
-        addPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                moveToaddPost();
-            }
-        });
-
         btnLogOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -52,19 +33,4 @@ public class UserActivity extends AppCompatActivity {
         });
 
     }
-
-private void moveToaddPost(){
-        Intent intent = new Intent (UserActivity.this, test.class);
-startActivity(intent);
-
-
-}
-
-
-   private void movetobookslist(){
-        Intent intent = new Intent(UserActivity.this, BooksList.class);
-        startActivity(intent);
-
-   }
-
 }

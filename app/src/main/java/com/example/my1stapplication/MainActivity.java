@@ -24,14 +24,16 @@ import com.google.firebase.storage.StorageReference;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
-    EditText name,email,password;
+    EditText name,email,password,password2;
     Button mRegisterbtn;
     TextView mLoginPageBack;
     FirebaseAuth mAuth;
     StorageReference mdatabase;
-    String Name,Email,Password;
+    String Name,Email,Password ;
     ProgressDialog mDialog;
     Toolbar tb;
+    private String Password2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         name = (EditText)findViewById(R.id.name);
         email = (EditText)findViewById(R.id.email);
         password = (EditText)findViewById(R.id.password);
+        password2 = (EditText)findViewById(R.id.password2);
         mRegisterbtn = (Button)findViewById(R.id.signUp);
         mLoginPageBack = (TextView)findViewById(R.id.signIn);
         mAuth = FirebaseAuth.getInstance();
@@ -62,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Name = name.getText().toString().trim();
         Email = email.getText().toString().trim();
         Password = password.getText().toString().trim();
+        Password2 = password2.getText().toString().trim();
 
         if (TextUtils.isEmpty(Name)){
             Toast.makeText(MainActivity.this, "Enter Name", Toast.LENGTH_SHORT).show();
@@ -73,25 +77,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(MainActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
             return;
         }else if (Password.length()<6){
-            Toast.makeText(MainActivity.this,"Passwor must be greater then 6 digit",Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this,"Password must be more then 6 digits",Toast.LENGTH_SHORT).show();
             return;
+        }else  if (!password.equals(password2)) {
+
+            Toast.makeText(MainActivity.this,"Both password fields must be identical",Toast.LENGTH_SHORT).show();
+
         }
+
         mDialog.setMessage("Creating User please wait...");
         mDialog.setCanceledOnTouchOutside(false);
         mDialog.show();
-        mAuth.createUserWithEmailAndPassword(Email,Password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if (task.isSuccessful()){
-                    sendEmailVerification();
-                    mDialog.dismiss();
-                    OnAuth(task.getResult().getUser());
-                    mAuth.signOut();
-                }else{
-                    Toast.makeText(MainActivity.this,"error on creating user",Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        mAuth.createUserWithEmailAndPassword(Email, Password)
+                .addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        // If sign in fails, display a message to the user. If sign in succeeds
+                        // the auth state listener will be notified and logic to handle the
+                        // signed in user can be handled in the listener.
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(MainActivity.this, "Authentication failed." + task.getException(),
+                                    Toast.LENGTH_SHORT).show();
+                            mDialog.dismiss();
+                        } else {
+                            sendEmailVerification();
+                            startActivity(new Intent(MainActivity.this, MainActivity.class));
+                            mDialog.dismiss();
+                            finish();
+                        }
+                    }
+                });
+
     }
     //Email verification code using FirebaseUser object and using isSucccessful()function.
     private void sendEmailVerification() {
