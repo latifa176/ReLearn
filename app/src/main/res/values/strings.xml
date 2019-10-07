@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Re-Learn</string>
+    <array name="types">
+        <item>Text book</item>
+        <item>Power Point slides</item>
+        <item>notes</item>
+        <item>previous exams</item>
+        <item>work sheets</item>
+        <item>assignments and projects</item>
+        <item>other</item>
+    </array>
 </resources>
