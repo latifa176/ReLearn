@@ -70,7 +70,7 @@
         android:layout_marginRight="226dp"
         android:layout_marginBottom="211dp"
         android:background="@color/colorPrimaryDark"
-        android:text="Add post"
+        android:text="ADD POST"
         android:textAllCaps="false"
         android:textColor="@color/common_google_signin_btn_text_dark_default"
         app:layout_constraintBottom_toBottomOf="parent"

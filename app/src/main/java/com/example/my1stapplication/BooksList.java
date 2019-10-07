@@ -3,10 +3,16 @@ package com.example.my1stapplication;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,6 +27,8 @@ public class BooksList extends AppCompatActivity {
 List<Post> postslist;
 DatabaseReference db;
     ListView listViewPosts;
+ImageView home;
+ImageButton logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +37,32 @@ DatabaseReference db;
 db= FirebaseDatabase.getInstance().getReference("posts");
 
         listViewPosts = (ListView) findViewById(R.id.listViewPosts);
+        home = (ImageView) findViewById(R.id.home);
+        logout=(ImageButton) findViewById(R.id.logout);
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent I = new Intent(BooksList.this, ActivityLogin.class);
+                startActivity(I);
+                Log.e("TAG", "Message");
+            }
+        });
 postslist= new ArrayList<>();
+
+home.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        moveToHome();
+    }
+});
+    }
+
+    public void moveToHome(){
+
+        Intent intent = new Intent(BooksList.this, UserActivity.class);
+        startActivity(intent);
     }
 
     @Override

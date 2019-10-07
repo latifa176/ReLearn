@@ -53,14 +53,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Create new account"
+        android:textAllCaps="false"
+        android:textColor="#FF0E468A"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.33"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogIn"
         app:layout_constraintVertical_bias="0.13" />
-
-
 
 
     <TextView
@@ -73,11 +73,14 @@
         android:layout_marginEnd="205dp"
         android:layout_marginRight="205dp"
         android:layout_marginBottom="37dp"
-        android:text="forget your password? "
+        android:text="Forgot your password? Click Here!  "
+        android:textColor="#0E478D"
         app:layout_constraintBottom_toTopOf="@+id/btnLogIn"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.088"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/loginpaswd" />
+        app:layout_constraintTop_toBottomOf="@+id/loginpaswd"
+        app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
         android:id="@+id/imageView3"

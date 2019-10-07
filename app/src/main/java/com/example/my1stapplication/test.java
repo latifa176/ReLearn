@@ -2,15 +2,20 @@ package com.example.my1stapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
+import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -21,7 +26,8 @@ public class test extends AppCompatActivity {
     Button buttonDone;
     Spinner spinner;
     DatabaseReference db;
-
+ImageView home;
+    ImageButton logout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,11 +41,28 @@ public class test extends AppCompatActivity {
         bankname = (EditText) findViewById(R.id.bankname);
         price = (EditText) findViewById(R.id.price);
         description = (EditText) findViewById(R.id.description);
-
+home = (ImageView) findViewById(R.id.home);
         spinner = (Spinner) findViewById(R.id.spinner);
         buttonDone = (Button) findViewById(R.id.button6);
+logout=(ImageButton) findViewById(R.id.logout);
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Intent I = new Intent(test.this, ActivityLogin.class);
+                startActivity(I);
+                Log.e("TAG", "Message");
+            }
+        });
 
 
+home.setOnClickListener(new View.OnClickListener() {
+    @Override
+    public void onClick(View v) {
+        moveToHome();
+    }
+});
 buttonDone.setOnClickListener(new View.OnClickListener(){
 
     @Override
@@ -93,6 +116,11 @@ public void addPost(){
 
 
 
+    public void moveToHome(){
+
+        Intent intent = new Intent(test.this, UserActivity.class);
+        startActivity(intent);
+    }
 
 
 }

@@ -7,8 +7,18 @@
     tools:context=".addPostActivity">
 
 
-
-
+    <ImageView
+        android:id="@+id/home"
+        android:layout_width="95dp"
+        android:layout_height="58dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="9dp"
+        android:layout_marginLeft="9dp"
+        android:layout_marginTop="-3dp"
+        android:clickable="true"
+        app:srcCompat="@drawable/logo" />
 
     <TextView
         android:id="@+id/textView11"
@@ -36,7 +46,7 @@
         android:layout_marginEnd="106dp"
         android:layout_marginRight="106dp"
         android:shadowColor="#388E3C"
-        android:text="Done"
+        android:text="Post"
         android:textColor="#1F6823"
         android:textColorHighlight="#388E3C"
         app:layout_constraintEnd_toEndOf="parent"
@@ -103,11 +113,11 @@
         android:layout_centerInParent="true"
         android:layout_marginStart="59dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="49dp"
         android:layout_marginRight="5dp"
-        android:layout_marginBottom="707dp"
-        android:text="To add a post, please fill all the fields"
+        android:layout_marginBottom="709dp"
+        android:text="please fill all below:"
         android:textColor="#27702B"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="parent"
