@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -82,8 +83,15 @@ postslist.add(post);
                 }
 
 
-                postsList adapter= new postsList(BooksList.this,postslist );
+                postsList adapter= new postsList(BooksList.this, postslist );
           listViewPosts.setAdapter(adapter);
+          listViewPosts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+              @Override
+              public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                  Intent I = new Intent(BooksList.this, datailscart.class);
+                  startActivity(I);
+              }
+          });
 
 
             }

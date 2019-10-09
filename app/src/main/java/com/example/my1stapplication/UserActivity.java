@@ -15,6 +15,7 @@ public class UserActivity extends AppCompatActivity {
     Button btnLogOut;
     Button addPost;
     Button bookslist;
+    Button cart;
     FirebaseAuth firebaseAuth;
     private FirebaseAuth.AuthStateListener authStateListener;
     StorageReference courseReference, materialTypeReference;
@@ -26,11 +27,18 @@ public class UserActivity extends AppCompatActivity {
         btnLogOut = (Button) findViewById(R.id.btnLogOut);
         addPost = (Button) findViewById(R.id.b1);
         bookslist = (Button) findViewById(R.id.button);
-
+        cart= (Button)findViewById(R.id.cartBtn);
         bookslist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 movetobookslist();
+            }
+        });
+        cart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(UserActivity.this, CartList.class);
+                startActivity(intent);
             }
         });
 

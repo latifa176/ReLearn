@@ -41,7 +41,7 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/cartBtn"
         android:layout_width="386dp"
         android:layout_height="59dp"
         android:layout_marginStart="90dp"
@@ -78,7 +78,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.274"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintTop_toBottomOf="@+id/cartBtn"
         app:layout_constraintVertical_bias="1.0" />
 
     <ImageView
