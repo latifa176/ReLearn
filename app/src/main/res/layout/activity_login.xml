@@ -34,6 +34,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.41000003" />
 
+
     <Button
         android:id="@+id/btnLogIn"
         android:layout_width="wrap_content"
@@ -43,10 +44,10 @@
         android:textColor="@color/common_google_signin_btn_text_dark_default"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.34"
+        app:layout_constraintHorizontal_bias="0.346"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.57" />
+        app:layout_constraintVertical_bias="0.651" />
 
     <TextView
         android:id="@+id/TVSignIn"
@@ -60,8 +61,7 @@
         app:layout_constraintHorizontal_bias="0.33"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnLogIn"
-        app:layout_constraintVertical_bias="0.13" />
-
+        app:layout_constraintVertical_bias="0.43" />
 
     <TextView
         android:id="@+id/forgetpass"
@@ -80,7 +80,7 @@
         app:layout_constraintHorizontal_bias="0.088"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/loginpaswd"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.648" />
 
     <ImageView
         android:id="@+id/imageView3"

@@ -8,15 +8,15 @@
     <TextView
         android:id="@+id/materialname"
 
-        android:layout_width="193dp"
+        android:layout_width="173dp"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:layout_centerInParent="true"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="87dp"
-        android:layout_marginRight="87dp"
+        android:layout_marginEnd="150dp"
+        android:layout_marginRight="150dp"
         android:text="Material name"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textSize="14sp"
@@ -121,22 +121,5 @@
         android:textColor="#26632A"
         android:textSize="12sp"
         android:textStyle="bold" />
-
-    <Button
-        android:id="@+id/button5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="23dp"
-        android:layout_marginLeft="23dp"
-        android:layout_marginTop="114dp"
-        android:layout_marginEnd="172dp"
-        android:layout_marginBottom="5dp"
-        android:text="Add To Cart"
-        android:textSize="8sp" />
 
 </RelativeLayout>
