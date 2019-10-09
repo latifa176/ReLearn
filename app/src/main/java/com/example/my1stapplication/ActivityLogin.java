@@ -68,7 +68,7 @@ public class ActivityLogin extends AppCompatActivity {
             public void onClick(View view) {
                 String userEmail = loginEmailId.getText().toString();
                 final String userPaswd = logInpasswd.getText().toString();
-                if(userEmail.equals("admin@gmail.com") && userPaswd.equals("admin123")){
+                if(userEmail.equals("relearnapp@gmail.com") && userPaswd.equals("123ADMIN")){
                     startActivity(new Intent(ActivityLogin.this, Admin.class));
                 }
                 if (userEmail.isEmpty()) {
