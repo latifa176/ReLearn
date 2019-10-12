@@ -24,7 +24,7 @@ public class CartList extends Activity {
         final Button thirdBtn = (Button) findViewById(R.id.cartBtn);
 
         //Get Global Controller Class object (see application tag in AndroidManifest.xml)
-        Controller aController = (Controller) getApplicationContext();
+        Controller aController = (Controller) this.getApplicationContext();
 
         // Get Cart Size
         final int cartSize = aController.getCart().getCartSize();

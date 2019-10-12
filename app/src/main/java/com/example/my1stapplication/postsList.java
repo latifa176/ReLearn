@@ -37,12 +37,15 @@ this.postslist=postslist;
         TextView price1 = (TextView) listviewitem.findViewById(R.id.price);
 
         Post post = postslist.get(position);
-
-        materialname1.setText(post.getMaterialname());
-        coursename1.setText(post.getCoursename());
-        uniname1.setText(post.getUniname());
-        price1.setText(post.getPrice());
-
+try {
+    materialname1.setText(post.getMaterialname());
+    coursename1.setText(post.getCoursename());
+    uniname1.setText(post.getUniname());
+    price1.setText(post.getPrice());
+}
+catch(Exception e){
+    e.printStackTrace();
+}
         return listviewitem;
     }
 }

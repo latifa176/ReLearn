@@ -29,23 +29,26 @@ public class datailscart extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.bookslistlayout);
+        setContentView(R.layout.description);
+        final Controller aController = (Controller) this.getApplicationContext();
 
-        main_txt = findViewById(R.id.materialname);
-        sub_main_txt = findViewById(R.id.coursename);
-        desc=findViewById(R.id.price);
-        //matrialT =findViewById(R.id.matrialT);
+        main_txt = findViewById(R.id.main_txt);
+        sub_main_txt = findViewById(R.id.sub_main_txt);
+        desc=findViewById(R.id.desc);
+        matrialT =findViewById(R.id.matrialT);
         uniname =findViewById(R.id.uniname);
-        //descr=findViewById(R.id.descr);
-        //Button mainsitebtn = findViewById(R.id.mainsitebtn)      ;
+        descr=findViewById(R.id.descr);
+        Button mainsitebtn = findViewById(R.id.mainsitebtn)      ;
 
-        //mainsitebtn.setOnClickListener(new View.OnClickListener() {
+        mainsitebtn.setOnClickListener(new View.OnClickListener() {
 
-            /*@Override
+            @Override
             public void onClick(View v) {
+                ModelProducts product=new ModelProducts(sub_main_txt.getText().toString(),Integer.parseInt(descr.getText().toString().substring(0,descr.getText().toString().indexOf(' '))));
+                aController.setProducts(product);
                 Toast.makeText(datailscart.this, "the book has been added", Toast.LENGTH_SHORT).show();
-            }*/
-        //});
+            }
+        });
 
         FirebaseApp.initializeApp(this);
 
@@ -67,18 +70,18 @@ public class datailscart extends AppCompatActivity {
                             String materialtype = dataSnapshot.child("-LqXwjARONySi3JvUwAG").child("materialtype").getValue().toString();
                             String uni = dataSnapshot.child("-LqXwjARONySi3JvUwAG").child("uniname").getValue().toString();
                             String Descr = dataSnapshot.child("-LqXwjARONySi3JvUwAG").child("description").getValue().toString();
-                            desc.setText(price + " SR ");
+                            descr.setText(price + " SR ");
                             sub_main_txt.setText(coursename);
                             main_txt.setText(materialname);
-                            //matrialT.setText( "Material Type: "+materialtype);
+                            matrialT.setText( "Material Type: "+materialtype);
                             uniname.setText(uni);
-                            //descr.setText("Description: "+Descr);
+                            desc.setText("Description: "+Descr);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
 
-                /*    HashMap<String, Object> dataMap = (HashMap<String, Object>) dataSnapshot.getValue();
+                    /*HashMap<String, Object> dataMap = (HashMap<String, Object>) dataSnapshot.getValue();
 
                     for (String key : dataMap.keySet()) {
 
@@ -87,7 +90,7 @@ public class datailscart extends AppCompatActivity {
                         try {
                             HashMap<String, Object> userData = (HashMap<String, Object>) data;
 
-                          //  Toast.makeText(MainActivity.this, "" + userData.get("coursename"), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(datailscart.this, "" + userData.get("coursename"), Toast.LENGTH_SHORT).show();
 
                         } catch (ClassCastException cce) {
 
@@ -100,8 +103,8 @@ public class datailscart extends AppCompatActivity {
                             }
                         }
 
-                    }
-*/
+                    }*/
+
 
 
                 }
