@@ -1,11 +1,13 @@
 package com.example.my1stapplication;
 
-public class ModelProducts {
+import java.io.Serializable;
+
+public class ModelProducts implements Serializable {
 
     private String coursename ;
-    private int price;
+    private String price;
 
-    public ModelProducts(String coursename,int price)
+    public ModelProducts(String coursename,String price)
     {
         this.coursename  = coursename;
         this.price = price;
@@ -16,7 +18,7 @@ public class ModelProducts {
         return coursename;
     }
 
-    public int getProductPrice() {
+    public String getProductPrice() {
 
         return price;
     }

@@ -24,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 public class BooksList extends AppCompatActivity {
 
-
+    FirebaseAuth firebaseAuth;
 List<Post> postslist;
 DatabaseReference db;
     ListView listViewPosts;
@@ -87,9 +87,21 @@ postslist.add(post);
           listViewPosts.setAdapter(adapter);
           listViewPosts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
               @Override
-              public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                  Intent I = new Intent(BooksList.this, datailscart.class);
-                  startActivity(I);
+              public void onItemClick(AdapterView<?> parent, View view,
+                                      int position, long id) {
+                  Intent intent = new Intent(BooksList.this, datailscart.class);
+                  intent.putExtra("itemName",postslist.get(position).getMaterialname());
+                  intent.putExtra("itemPrice",postslist.get(position).getPrice());
+                  intent.putExtra("uni",postslist.get(position).getUniname());
+                  intent.putExtra("coursename",postslist.get(position).getCoursename());
+                  startActivity(intent);
+                  /*ModelProducts product = (ModelProducts) getIntent().g("product");
+                  Intent intent = new Intent(BooksList.this, datailscart.class);
+                  Bundle bundle = new Bundle();
+                  bundle.putSerializable("product", product);
+                  Log.d("TAG", "View product: " + product.getProductName());
+                  intent.putExtras(bundle);
+                  startActivity(intent);*/
               }
           });
 

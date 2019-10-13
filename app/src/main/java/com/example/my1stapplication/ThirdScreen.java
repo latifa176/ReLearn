@@ -4,8 +4,17 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-public class ThirdScreen extends Activity {
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+
+public class ThirdScreen extends Activity {
+    FirebaseDatabase database = FirebaseDatabase.getInstance();
+    DatabaseReference mDatabaseReference = database.getReference();
+    private ArrayList<ModelProducts> cartcollect;
+    private float totalcost=0;
+    private int totalproducts=0;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,10 +35,10 @@ public class ThirdScreen extends Activity {
         {
             //Get product details
             String pName    = aController.getCart().getProducts(i).getProductName();
-            int pPrice      = aController.getCart().getProducts(i).getProductPrice();
+            //int pPrice      = aController.getCart().getProducts(i).getProductPrice();
 
 
-            showString += " Product Name : "+pName+""+ "Price : "+pPrice+" "+ " -----------------------------------";
+            //showString += " Product Name : "+pName+""+ "Price : "+pPrice+" "+ " -----------------------------------";
         }
 
 

@@ -1,5 +1,6 @@
 package com.example.my1stapplication;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,6 +10,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,8 +24,12 @@ import java.util.HashMap;
 import java.util.List;
 
 public class datailscart extends AppCompatActivity {
-
-
+    private FirebaseDatabase mItemsFirebaseDatabase;
+    private DatabaseReference mItemsDatabaseReference;
+    private FirebaseDatabase mFirebaseDatabase;
+    private DatabaseReference mCustomerRefernce;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    ModleCart cmObej;
     TextView main_txt,sub_main_txt,desc , matrialT,uniname , descr;
 
 
@@ -39,16 +46,28 @@ public class datailscart extends AppCompatActivity {
         uniname =findViewById(R.id.uniname);
         descr=findViewById(R.id.descr);
         Button mainsitebtn = findViewById(R.id.mainsitebtn)      ;
-
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+        mCustomerRefernce = mFirebaseDatabase.getReference().child("Cart").child(user.getProviderId());
+        final String itemName = getIntent().getStringExtra("itemName");
+        final String itemPrice = getIntent().getStringExtra("itemPrice");
+        final String uni = getIntent().getStringExtra("uni");
+        final String coursename = getIntent().getStringExtra("coursename");
         mainsitebtn.setOnClickListener(new View.OnClickListener() {
-
             @Override
-            public void onClick(View v) {
-                ModelProducts product=new ModelProducts(sub_main_txt.getText().toString(),Integer.parseInt(descr.getText().toString().substring(0,descr.getText().toString().indexOf(' '))));
-                aController.setProducts(product);
-                Toast.makeText(datailscart.this, "the book has been added", Toast.LENGTH_SHORT).show();
+            public void onClick(View view) {
+
+                ModelProducts product=new ModelProducts(sub_main_txt.toString(),descr.toString());
+                mCustomerRefernce.push().setValue(product);
+                Intent intent= new Intent(datailscart.this, CartList.class);
+                intent.putExtra("itemName",itemName);
+                intent.putExtra("itemPrice",itemPrice);
+                intent.putExtra("uni",uni);
+                intent.putExtra("coursename",coursename);
+                Toast.makeText(datailscart.this, "Added to Cart", Toast.LENGTH_SHORT).show();
+                startActivity(intent);
             }
         });
+
 
         FirebaseApp.initializeApp(this);
 
@@ -59,8 +78,16 @@ public class datailscart extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 if (dataSnapshot.exists()) {
+                    desc.setVisibility(View.INVISIBLE);
+                    matrialT.setVisibility(View.INVISIBLE);
 
-                    try {
+                    descr.setText(itemPrice + " SR ");
+                    sub_main_txt.setText(coursename);
+                    main_txt.setText(itemName);
+                    //matrialT.setText( "Material Type: "+materialtype);
+                    uniname.setText("University:"+uni);
+                    //desc.setText("Description: "+Descr);
+                    /*try {
                         List<String> posts = new ArrayList<>();
                         for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
                             posts.add(postSnapshot.getValue().toString());
@@ -79,7 +106,7 @@ public class datailscart extends AppCompatActivity {
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
-                    }
+                    }*/
 
                     /*HashMap<String, Object> dataMap = (HashMap<String, Object>) dataSnapshot.getValue();
 
