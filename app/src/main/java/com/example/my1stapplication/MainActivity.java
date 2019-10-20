@@ -76,6 +76,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }else if (TextUtils.isEmpty(Password)){
             Toast.makeText(MainActivity.this, "Enter Password", Toast.LENGTH_SHORT).show();
             return;
+        }else if (TextUtils.isEmpty(Password2)){
+            Toast.makeText(MainActivity.this, "Enter Confirm Password", Toast.LENGTH_SHORT).show();
+            return;
         }else if (Password.length()<6){
             Toast.makeText(MainActivity.this,"Password must be more then 6 digits",Toast.LENGTH_SHORT).show();
             return;
